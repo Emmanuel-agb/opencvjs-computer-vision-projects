@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Template Matching</title>
+<style>
+  /* Container rows & columns */
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* wrap if needed */
+    margin-bottom: 12px;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+
+  /* Constrain image and canvas to a comfortable size */
+  img, canvas {
+    max-width: 300px; /* adjust as needed */
+    height: auto;     /* keep aspect ratio */
+    border: 1px solid #333;
+    margin-bottom: 8px;
+  }
+
+  #controlPanel {
+    margin-top: 12px;
+  }
+  </style>
+</head>
+<body>
+<h2>Template Matching</h2>
+<p id="status">OpenCV.js is loading...</p>
+<div>
+  <img id="imageSrc" alt="No Image" />
+  <div class="caption">imageSrc <input type="file" id="fileInput" name="file"/></div>
+</div>
+<div>
+  <img id="templateSrc" alt="No Template" />
+  <div class="caption">templateSrc <input type="file" id="templateInput" name="file"/></div>
+</div>
+<div>
+  <canvas id="canvasOutput"></canvas>
+  <div class="caption">canvasOutput</div>
+</div>
+<div>
+  <button onclick="applyTemplateMatching()">Match Template</button>
+</div>
+
+<script type="text/javascript" src="opencv.js"></script>
+<script type="text/javascript" src="templateMatching.js"></script>
+</body>
+</html>

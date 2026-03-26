@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Image Processing OpenCV.js (Problems 1-4)</title>
+  <style>
+    /* Container rows & columns */
+    .row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap; /* wrap if needed */
+      margin-bottom: 12px;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+
+    /* Constrain image and canvas to a comfortable size */
+    img, canvas {
+      max-width: 300px; /* adjust as needed */
+      height: auto;     /* keep aspect ratio */
+      border: 1px solid #333;
+      margin-bottom: 8px;
+    }
+
+    #controlPanel {
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+<h2>Image Processing in OpenCV.js (Problems 1-4)</h2>
+
+<p id="status">OpenCV.js is loading...</p>
+
+<div class="row">
+  <!-- Original image input -->
+  <div class="column">
+    <label for="fileInput">Main Image:</label><br>
+    <input type="file" id="fileInput" name="file" accept="image/*"/>
+    <br>
+    <img id="imageSrc" alt="No Image" />
+  </div>
+
+  <!-- Template image input for Problem 4 -->
+  <div class="column">
+    <label for="fileTemplateInput">Template Image (for Problem 4):</label><br>
+    <input type="file" id="fileTemplateInput" name="file" accept="image/*"/>
+    <br>
+    <img id="templateSrc" alt="No Template" />
+  </div>
+
+  <!-- Output canvas -->
+  <div class="column">
+    <canvas id="canvasOutput"></canvas>
+  </div>
+</div>
+
+<div id="controlPanel">
+  <h3>Controls</h3>
+
+  <!-- Problem selection: Convolution, Thresholding, Gaussian, TemplateMatching -->
+  <label for="operationSelect">Select Operation:</label>
+  <select id="operationSelect">
+    <option value="none">None</option>
+    <option value="convolution">3x3 Convolution (Problem 1)</option>
+    <option value="threshold">Threshold (Problem 2)</option>
+    <option value="gaussian">Gaussian Blur (Problem 3)</option>
+    <option value="templateMatch">Template Matching (Problem 4)</option>
+  </select>
+  <br><br>
+
+  <!-- Grayscale toggle (for Problem 1, Problem 2, Problem 3) -->
+  <label for="grayCheck">Grayscale? </label>
+  <input type="checkbox" id="grayCheck" />
+
+  <!-- Problem 1: Convolution filter selection -->
+  <div id="convPanel" style="margin-top:8px;">
+    <label for="convSelect">Convolution Filter:</label>
+    <select id="convSelect">
+      <option value="none">None</option>
+      <option value="blur">Blur</option>
+      <option value="sharpen">Sharpen</option>
+      <option value="edge">Edge Detect</option>
+      <option value="sobelX">Sobel X</option>
+      <option value="sobelY">Sobel Y</option>
+      <option value="prewittX">Prewitt X</option>
+      <option value="prewittY">Prewitt Y</option>
+      <option value="emboss">Emboss</option>
+    </select>
+  </div>
+
+  <!-- Problem 2: Thresholding controls -->
+  <div id="threshPanel" style="margin-top:8px;">
+    <label for="threshTypeSelect">Type:</label>
+    <select id="threshTypeSelect">
+      <option value="binary">Binary</option>
+      <option value="binaryInv">Binary Inverted</option>
+      <option value="otsu">OTSU (simple)</option>
+      <option value="adaptiveMean">Adaptive Mean</option>
+      <option value="adaptiveGaussian">Adaptive Gaussian</option>
+    </select>
+    <br><br>
+    <label for="threshValueRange">Threshold Value:</label>
+    <input type="range" id="threshValueRange" min="0" max="400" value="127" />
+    <span id="threshValueLabel">127</span>
+  </div>
+
+  <!-- Problem 3: Gaussian blur controls -->
+  <div id="gaussPanel" style="margin-top:8px;">
+    <label for="ksizeRange">Kernel Size [5..25]:</label>
+    <input type="range" id="ksizeRange" min="5" max="50" step="2" value="5"/>
+    <span id="ksizeLabel">5</span>
+    <br><br>
+    <label for="sigmaRange">Sigma [0..10]:</label>
+    <input type="range" id="sigmaRange" min="0" max="20" step="1" value="0"/>
+    <span id="sigmaLabel">0</span>
+  </div>
+
+  <!-- Problem 4: Template matching controls -->
+  <div id="templatePanelControls" style="margin-top:8px;">
+    <p>Load a main image and a template image, select "Template Matching" in the dropdown, then click "Apply".</p>
+  </div>
+
+  <br>
+  <button id="applyBtn">Apply</button>
+</div>
+
+<script type="text/javascript" src="opencv.js"></script>
+<script type="text/javascript" src="imgTemplateOpenCV.js"></script>
+</body>
+</html>
